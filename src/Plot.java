@@ -71,6 +71,7 @@ public class Plot {
 		
 		Plot prevHouse = new Plot();
 		
+		//maybe add width and depth
 		if(plot.getX() > prevHouse.getX() && plot.getY() > prevHouse.getY())
 		{
 			plotOverlaps = false;
@@ -87,8 +88,14 @@ public class Plot {
 		boolean plotEncompasses;
 		
 		Plot prevHouse = new Plot();
-		
-		if(plot)
+		//maybe add width and depth
+		if(plot.getX() <= prevHouse.getX() && plot.getY() <= prevHouse.getY()) 
+		{
+			plotEncompasses = true;
+		}else {
+			plotEncompasses = false;
+		}
+		return plotEncompasses;
 	}
 	
 	public String toString() {

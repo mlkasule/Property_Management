@@ -1,39 +1,38 @@
 /**
  * This class represents the plot object with x, y, width, and depth values
+ * 
  * @author Mark Kasule
  *
  */
 public class Plot {
-	
+
 	private int x;
 	private int y;
 	private int width;
 	private int depth;
-	
-	public Plot() 
-	{
+
+	public Plot() {
 		x = 0;
 		y = 0;
 		width = 1;
 		depth = 1;
 	}
-	
-	public Plot(Plot p) 
-	{
+
+	public Plot(Plot p) {
 		x = p.x;
 		y = p.y;
 		width = p.width;
 		depth = p.depth;
-		
+
 	}
-	
+
 	public Plot(int x, int y, int width, int depth) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.depth = depth;
 	}
-	
+
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -65,39 +64,37 @@ public class Plot {
 	public int getDepth() {
 		return depth;
 	}
+
 	public boolean overlaps(Plot plot) {
-		
+
 		boolean plotOverlaps;
-		
+
 		Plot prevHouse = new Plot();
-		
-		//maybe add width and depth
-		if(plot.getX() > prevHouse.getX() && plot.getY() > prevHouse.getY())
-		{
+
+		// maybe add width and depth but not exceed width 10
+		if (plot.getX() > prevHouse.getX() && plot.getY() > prevHouse.getY()) {
 			plotOverlaps = false;
-		}else {
+		} else {
 			plotOverlaps = true;
 		}
-		
+
 		return plotOverlaps;
-		
+
 	}
-	
-	public boolean encompasses(Plot plot) 
-	{
+
+	public boolean encompasses(Plot plot) {
 		boolean plotEncompasses;
-		
+
 		Plot prevHouse = new Plot();
-		//maybe add width and depth
-		if(plot.getX() <= prevHouse.getX() && plot.getY() <= prevHouse.getY()) 
-		{
+		// maybe add width and depth but not exceed width 10
+		if (plot.getX() <= prevHouse.getX() && plot.getY() <= prevHouse.getY()) {
 			plotEncompasses = true;
-		}else {
+		} else {
 			plotEncompasses = false;
 		}
 		return plotEncompasses;
 	}
-	
+
 	public String toString() {
 		String str = "Upper left: (" + x + "," + y + ") Width: " + width + " Depth: " + depth;
 

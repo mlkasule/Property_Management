@@ -1,6 +1,8 @@
 /**
- *  
- * This class represents the  property with name, city, owner, rent amount and plot details
+ * 
+ * This class represents the property with name, city, owner, rent amount and
+ * plot details
+ * 
  * @author Mark Kasule
  *
  */
@@ -8,15 +10,15 @@ public class Property {
 
 	private String propertyName; // name of property
 	private String city; // name of the city
-	private String owner; // name of house owner
 	private double rentAmount; // holds the plot object
+	private String owner; // name of house owner
 	private Plot plot;
 
 	public Property() {
 		propertyName = "";
 		city = "";
-		owner = "";
 		rentAmount = 0;
+		owner = "";
 		this.plot = new Plot(0, 0, 1, 1);
 	}
 
@@ -30,8 +32,8 @@ public class Property {
 	public Property(String propertyName, String city, double rentAmount, String owner) {
 		this.propertyName = propertyName;
 		this.city = city;
-		this.owner = owner;
 		this.rentAmount = rentAmount;
+		this.owner = owner;
 	}
 
 	/**
@@ -46,8 +48,8 @@ public class Property {
 			int depth) {
 		this.propertyName = propertyName;
 		this.city = city;
-		this.owner = owner;
 		this.rentAmount = rentAmount;
+		this.owner = owner;
 		this.plot = new Plot(x, y, width, depth);
 	}
 
@@ -134,17 +136,15 @@ public class Property {
 	 * @return a plot copy
 	 */
 	public Plot getPlot() {
-		return new Plot(plot);
+		return plot;
 	}
 
 	/**
 	 * print name, city, owner, rent, amount
 	 */
 	public String toString() {
-		String str = "Property Name: " + propertyName + "\n"
-					+ "Located in: " + city + "\n"
-					+ "Belonging to: " + owner + "\n"
-					+ "Rent Amount: " + rentAmount + " ";
+		String str = "Property Name: " + propertyName + "\n" + "Located in: " + city + "\n" + "Belonging to: " + owner
+				+ "\n" + "Rent Amount: " + rentAmount + " ";
 		return str;
 	}
 

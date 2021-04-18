@@ -72,29 +72,32 @@ public class ManagementCompany {
 	public Plot getPlot() {
 		return new Plot(plot);
 	}
+	// public Property add
 
 	public int addProperty(Property property) {
 
-		Property prop = new Property();
-
 		// create a property array to hold each property
 		Property[] newProperty = new Property[MAX_PROPERTY];
-		// report status every after entry
+
+		Property house = new Property(property);
+
 		int status = 0;
 
-		for (int i = 0; i < newProperty.length; i++) {
-			newProperty[i] = property;
+		for (int i = 0; i < MAX_PROPERTY; i++) {
 
-			if (property == null) {
+			newProperty[i] = house;
+
+			if (house.equals(null)) {
 				status = -2;
-			} else if (newProperty[0].getPlot() != newProperty[i].getPlot()) {
+			} else if (newProperty[0].getPlot().encompasses(newProperty[i].getPlot())) {
 				status = -3;
 
-			} else if (newProperty[i].getPlot().overlaps(property.getPlot())) {
+			} else if (newProperty[i].getPlot().overlaps(newProperty[0].getPlot())) {
 				status = -4;
 			} else if (newProperty.length == MAX_PROPERTY) {
 				status = -1;
-			} else if (newProperty[i] != null) {
+			} else if (!house.equals(null)) {
+				newProperty[i] = new Property(house);
 				status = i;
 			}
 		}
@@ -103,22 +106,56 @@ public class ManagementCompany {
 	}
 
 	public int addProperty(String name, String city, double rent, String owner) {
-		Property newProperty = new Property(name, city, rent, owner);
+		Property house = new Property(name, city, rent, owner);
+		int status = 0;
 
-		// add it to property array and store to checkStatus
-		int recieveStatus = addProperty(newProperty);
+		Property[] properties = new Property[MAX_PROPERTY];
 
-		return recieveStatus;
+		for (int i = 0; i < properties.length; i++) {
+			if (house.equals(null)) {
+				status = -2;
+			} else if (properties[0].getPlot().encompasses(properties[i].getPlot())) {
+				status = -3;
+
+			} else if (properties[i].getPlot().overlaps(properties[0].getPlot())) {
+				status = -4;
+			} else if (properties.length == MAX_PROPERTY) {
+				status = -1;
+			} else if (!properties[i].equals(null)) {
+				properties[i] = new Property(house);
+				status = i;
+			}
+		}
+
+		return status;
+
 	}
 
 	public int addProperty(String name, String city, double rent, String owner, int x, int y, int width, int depth) {
 
-		Property newProperty = new Property(name, city, rent, owner, x, y, width, depth);
+		Property house = new Property(name, city, rent, owner, x, y, width, depth);
 
-		// send it to property array and store result to checkStatus
-		int recieveStatus = addProperty(newProperty);
+		Property[] properties = new Property[MAX_PROPERTY];
 
-		return recieveStatus;
+		int status = 0;
+
+		for (int i = 0; i < properties.length; i++) {
+			if (house.equals(null)) {
+				status = -2;
+			} else if (properties[0].getPlot().encompasses(properties[i].getPlot())) {
+				status = -3;
+
+			} else if (properties[i].getPlot().overlaps(properties[0].getPlot())) {
+				status = -4;
+			} else if (properties.length == MAX_PROPERTY) {
+				status = -1;
+			} else if (!properties[i].equals(null)) {
+				properties[i] = new Property(house);
+				status = i;
+			}
+		}
+
+		return status;
 	}
 
 	/**
@@ -128,7 +165,9 @@ public class ManagementCompany {
 	 * @return string of property
 	 */
 	private String displayPropertyAtIndex(int i) {
-		String str = properties[i].toString();
+
+		Property[] newProperty = new Property[MAX_PROPERTY];
+		String str = newProperty[i].toString();
 		return str;
 	}
 
@@ -138,10 +177,16 @@ public class ManagementCompany {
 
 	public double maxRentProp() {
 
+		Property[] newProperty = new Property[MAX_PROPERTY];
+
+		Property house = new Property();
+
 		double highestRent = 0; // track max rent
-		for (int i = 0; i < properties.length; i++) {
+
+		for (int i = 0; i < newProperty.length; i++) {
+			properties[i] = house;
 			if (properties[i].getRentAmount() > properties[0].getRentAmount()) {
-				highestRent = properties[i].getRentAmount();
+				highestRent = newProperty[i].getRentAmount();
 			}
 		}
 		return highestRent;
@@ -149,9 +194,16 @@ public class ManagementCompany {
 
 	private int maxRentPropertyIndex() {
 
+		// property list
+		Property[] newProperty = new Property[MAX_PROPERTY];
+
+		// property
+		Property house = new Property();
+
 		int highestIndex = 0; // track max index
-		for (int i = 0; i < properties.length; i++) {
-			if (properties[i].getRentAmount() > properties[0].getRentAmount()) {
+		for (int i = 0; i < newProperty.length; i++) {
+			newProperty[i] = house;
+			if (newProperty[i].getRentAmount() > newProperty[0].getRentAmount()) {
 				highestIndex = i;
 			}
 		}
@@ -160,8 +212,15 @@ public class ManagementCompany {
 
 	public double totalRent() {
 		int total = 0; // track sum
-		for (int i = 0; i < properties.length; i++) {
-			total += properties[i].getRentAmount();
+
+		Property[] newProperty = new Property[MAX_PROPERTY];
+
+		// property
+		Property house = new Property();
+
+		for (int i = 0; i < newProperty.length; i++) {
+			newProperty[i] = house;
+			total += newProperty[i].getRentAmount();
 		}
 		return total;
 	}
@@ -172,10 +231,16 @@ public class ManagementCompany {
 	 */
 	@Override
 	public String toString() {
+		// property list
+		Property[] newProperty = new Property[MAX_PROPERTY];
+
+		// house object
+		Property house = new Property();
 
 		String str = "";
-		for (int i = 0; i < properties.length; i++) {
-			str = properties[i].toString();
+		for (int i = 0; i < newProperty.length; i++) {
+			newProperty[i] = house;
+			str = newProperty[i].toString();
 		}
 		return str;
 	}

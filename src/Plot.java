@@ -12,17 +12,17 @@ public class Plot {
 	private int depth;
 
 	public Plot() {
-		x = 0;
-		y = 0;
-		width = 1;
-		depth = 1;
+		this.x = 0;
+		this.y = 0;
+		this.width = 1;
+		this.depth = 1;
 	}
 
 	public Plot(Plot p) {
-		x = p.x;
-		y = p.y;
-		width = p.width;
-		depth = p.depth;
+		this.x = p.x;
+		this.y = p.x;
+		this.width = p.width;
+		this.depth = p.depth;
 
 	}
 
@@ -64,14 +64,14 @@ public class Plot {
 	public int getDepth() {
 		return depth;
 	}
-
+	//add width and depth but exceed width 10
 	public boolean overlaps(Plot plot) {
 
 		boolean plotOverlaps;
 
 		Plot prevHouse = new Plot();
 
-		// maybe add width and depth but not exceed width 10
+
 		if (plot.getX() > prevHouse.getX() && plot.getY() > prevHouse.getY()) {
 			plotOverlaps = false;
 		} else {
@@ -81,12 +81,12 @@ public class Plot {
 		return plotOverlaps;
 
 	}
-
+	// add width and depth but not exceed width 10
 	public boolean encompasses(Plot plot) {
 		boolean plotEncompasses;
 
 		Plot prevHouse = new Plot();
-		// maybe add width and depth but not exceed width 10
+		
 		if (plot.getX() <= prevHouse.getX() && plot.getY() <= prevHouse.getY()) {
 			plotEncompasses = true;
 		} else {

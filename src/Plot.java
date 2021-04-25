@@ -64,39 +64,41 @@ public class Plot {
 	public int getDepth() {
 		return depth;
 	}
-	//add width and depth but exceed width 10
+
+	// add width and depth but exceed width 10
 	public boolean overlaps(Plot plot) {
 
-		boolean plotOverlaps;
+		boolean plotOverlaps = true;
 
-		Plot prevHouse = new Plot();
-
-
-		if (plot.getX() > prevHouse.getX() && plot.getY() > prevHouse.getY()) {
+		if ((getX() + getWidth()) < plot.getX() && (getY() + getWidth()) < plot.getY()
+				&& (plot.getY() + plot.getWidth()) < getY() && (plot.getX() + plot.getWidth()) < getX()
+				&& getX() > plot.getY() && (getX() + getWidth()) > (plot.getY() + plot.getWidth())
+				&& ((plot.getX() + plot.getWidth()) > (getY() + getWidth())) && (plot.getX() > getX())){
 			plotOverlaps = false;
-		} else {
-			plotOverlaps = true;
 		}
-
 		return plotOverlaps;
 
 	}
+
 	// add width and depth but not exceed width 10
 	public boolean encompasses(Plot plot) {
-		boolean plotEncompasses;
+		boolean plotEncompasses = true;
 
-		Plot prevHouse = new Plot();
-		
-		if (plot.getX() <= prevHouse.getX() && plot.getY() <= prevHouse.getY()) {
-			plotEncompasses = true;
-		} else {
+		if (plot.getX() >= getX() && plot.getX() + plot.getWidth() >= getX() + getWidth()
+				&& plot.getX() + plot.getDepth() >= getX() + getDepth()
+				&& plot.getX() + plot.getDepth() + plot.getWidth() >= getX() + getDepth() + getWidth()
+				&& plot.getX() + plot.getDepth() + plot.getWidth() + plot.getDepth() >= getX() + getDepth() + getWidth()
+						+ getDepth()
+				&& plot.getX() + plot.getDepth() >= getX() + getDepth()
+				&& plot.getX() < getX() && plot.getX() + plot.getWidth() < getWidth() + getX() 
+				&& plot.getY() < getX() && plot.getY() < getY() + getWidth()) {
 			plotEncompasses = false;
 		}
 		return plotEncompasses;
 	}
 
 	public String toString() {
-		String str = "Upper left: (" + x + "," + y + ") Width: " + width + " Depth: " + depth;
+		String str = "Upper left: (" + getX() + "," + getY() + "); Width: " + getWidth() + " Depth: " + getDepth();
 
 		return str;
 	}

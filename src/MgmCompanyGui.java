@@ -54,10 +54,7 @@ public class MgmCompanyGui extends Application {
 	 */
 	private boolean propertyFieldsEmpty() {
 		if (propNametxt.getText().equals("") || propCitytxt.getText().equals("") || propRenttxt.getText().equals("")
-				|| propOwnertxt.getText().equals("")
-		// || propXtxt.getText().equals("") || propYtxt.getText().equals("") ||
-		// propWidthtxt.getText().equals("") || propDepthtxt.getText().equals("")
-		)
+				|| propOwnertxt.getText().equals(""))
 			return true;
 		return false;
 

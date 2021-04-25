@@ -34,11 +34,11 @@ public class ManagementCompany {
 	}
 
 	public ManagementCompany(ManagementCompany otherCompany) {
-		name = otherCompany.name;
-		taxID = otherCompany.taxID;
-		mgmFeePer = otherCompany.mgmFeePer;
-		plot = otherCompany.plot;
-		properties = otherCompany.properties;
+		this.name = otherCompany.name;
+		this.taxID = otherCompany.taxID;
+		this.mgmFeePer = otherCompany.mgmFeePer;
+		this.plot = otherCompany.plot;
+		this.properties = otherCompany.properties;
 	}
 
 	public void setName(String name) {
@@ -72,12 +72,15 @@ public class ManagementCompany {
 	public Plot getPlot() {
 		return new Plot(plot);
 	}
-	// public Property add
+	/**
+	 * 
+	 * @param property
+	 * @return
+	 */
 
 	public int addProperty(Property property) {
 
 		// create a property array to hold each property
-		Property[] newProperty = new Property[MAX_PROPERTY];
 
 		Property house = new Property(property);
 
@@ -85,19 +88,19 @@ public class ManagementCompany {
 
 		for (int i = 0; i < MAX_PROPERTY; i++) {
 
-			newProperty[i] = house;
+			properties[i] = property;
 
-			if (house.equals(null)) {
+			if (property.equals(null)) {
 				status = -2;
-			} else if (newProperty[0].getPlot().encompasses(newProperty[i].getPlot())) {
+			} else if (properties[0].getPlot().encompasses(properties[i].getPlot())) {
 				status = -3;
 
-			} else if (newProperty[i].getPlot().overlaps(newProperty[0].getPlot())) {
+			} else if (properties[i].getPlot().overlaps(properties[0].getPlot())) {
 				status = -4;
-			} else if (newProperty.length == MAX_PROPERTY) {
+			} else if (properties.length == MAX_PROPERTY) {
 				status = -1;
 			} else if (!house.equals(null)) {
-				newProperty[i] = new Property(house);
+				properties[i] = house;
 				status = i;
 			}
 		}
@@ -106,10 +109,9 @@ public class ManagementCompany {
 	}
 
 	public int addProperty(String name, String city, double rent, String owner) {
+
 		Property house = new Property(name, city, rent, owner);
 		int status = 0;
-
-		Property[] properties = new Property[MAX_PROPERTY];
 
 		for (int i = 0; i < properties.length; i++) {
 			if (house.equals(null)) {
@@ -122,7 +124,7 @@ public class ManagementCompany {
 			} else if (properties.length == MAX_PROPERTY) {
 				status = -1;
 			} else if (!properties[i].equals(null)) {
-				properties[i] = new Property(house);
+				properties[i] = house;
 				status = i;
 			}
 		}
@@ -135,8 +137,6 @@ public class ManagementCompany {
 
 		Property house = new Property(name, city, rent, owner, x, y, width, depth);
 
-		Property[] properties = new Property[MAX_PROPERTY];
-
 		int status = 0;
 
 		for (int i = 0; i < properties.length; i++) {
@@ -150,12 +150,22 @@ public class ManagementCompany {
 			} else if (properties.length == MAX_PROPERTY) {
 				status = -1;
 			} else if (!properties[i].equals(null)) {
-				properties[i] = new Property(house);
+				properties[i] = house;
 				status = i;
 			}
 		}
 
 		return status;
+	}
+
+	// print all properties
+	public Property propertyList(Property property) {
+
+		for (int i = 0; i < properties.length; i++)
+			properties[i] = property;
+
+		return new Property(property);
+
 	}
 
 	/**
@@ -166,8 +176,7 @@ public class ManagementCompany {
 	 */
 	private String displayPropertyAtIndex(int i) {
 
-		Property[] newProperty = new Property[MAX_PROPERTY];
-		String str = newProperty[i].toString();
+		String str = properties[i].toString();
 		return str;
 	}
 
@@ -177,16 +186,15 @@ public class ManagementCompany {
 
 	public double maxRentProp() {
 
-		Property[] newProperty = new Property[MAX_PROPERTY];
 
 		Property house = new Property();
 
 		double highestRent = 0; // track max rent
 
-		for (int i = 0; i < newProperty.length; i++) {
+		for (int i = 0; i < properties.length; i++) {
 			properties[i] = house;
 			if (properties[i].getRentAmount() > properties[0].getRentAmount()) {
-				highestRent = newProperty[i].getRentAmount();
+				highestRent = properties[i].getRentAmount();
 			}
 		}
 		return highestRent;
@@ -195,15 +203,14 @@ public class ManagementCompany {
 	private int maxRentPropertyIndex() {
 
 		// property list
-		Property[] newProperty = new Property[MAX_PROPERTY];
 
 		// property
 		Property house = new Property();
 
 		int highestIndex = 0; // track max index
-		for (int i = 0; i < newProperty.length; i++) {
-			newProperty[i] = house;
-			if (newProperty[i].getRentAmount() > newProperty[0].getRentAmount()) {
+		for (int i = 0; i < properties.length; i++) {
+			properties[i] = house;
+			if (properties[i].getRentAmount() > properties[0].getRentAmount()) {
 				highestIndex = i;
 			}
 		}
@@ -213,14 +220,12 @@ public class ManagementCompany {
 	public double totalRent() {
 		int total = 0; // track sum
 
-		Property[] newProperty = new Property[MAX_PROPERTY];
-
 		// property
 		Property house = new Property();
 
-		for (int i = 0; i < newProperty.length; i++) {
-			newProperty[i] = house;
-			total += newProperty[i].getRentAmount();
+		for (int i = 0; i < properties.length; i++) {
+			properties[i] = house;
+			total += properties[i].getRentAmount();
 		}
 		return total;
 	}
@@ -232,15 +237,15 @@ public class ManagementCompany {
 	@Override
 	public String toString() {
 		// property list
-		Property[] newProperty = new Property[MAX_PROPERTY];
+		// Property[] newProperty = new Property[MAX_PROPERTY];
 
 		// house object
 		Property house = new Property();
 
 		String str = "";
-		for (int i = 0; i < newProperty.length; i++) {
-			newProperty[i] = house;
-			str = newProperty[i].toString();
+		for (int i = 0; i < properties.length; i++) {
+			properties[i] = house;
+			str = properties[i].toString();
 		}
 		return str;
 	}
